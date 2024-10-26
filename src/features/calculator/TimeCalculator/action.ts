@@ -90,7 +90,7 @@ export function calculate(e: FormEvent<HTMLFormElement>): ActionReturn {
   const parsedStartTime = new Date(
     `${now.toISOString().split("T")[0]}T${startTimeStr}:00`
   );
-  let parsedEndTime = new Date(
+  const parsedEndTime = new Date(
     `${now.toISOString().split("T")[0]}T${endTimeStr}:00`
   );
 
