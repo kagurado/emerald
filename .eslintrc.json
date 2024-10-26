@@ -1,0 +1,9 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "next/core-web-vitals",
+    "next/typescript",
+    "plugin:import/recommended"
+  ],
+  "plugins": ["import"]
+}
