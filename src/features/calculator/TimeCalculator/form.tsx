@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/ja";
@@ -16,15 +16,15 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { ActionReturn, calculate } from "./action";
+import GradientCircularProgress from "@/components/ui/progress";
 
 export default function TimeCalculatorForm() {
+  const [loading, setLoading] = useState(true);
   const [cleared, setCleared] = useState<boolean>(false);
   const [calculationResult, setCalculationResult] =
     useState<ActionReturn | null>(null);
-  const [startTime, setStartTime] = useState<Dayjs | null>(
-    dayjs().set("hour", 19).startOf("hour")
-  );
-  const [endTime, setEndTime] = useState<Dayjs | null>(dayjs());
+  const [startTime, setStartTime] = useState<Dayjs | null>(null);
+  const [endTime, setEndTime] = useState<Dayjs | null>(null);
   const [malePeople, setMalePeople] = useState<string | undefined>(undefined);
   const [femalePeople, setFemalePeople] = useState<string | undefined>(
     undefined
@@ -32,6 +32,14 @@ export default function TimeCalculatorForm() {
   const [errors, setErrors] = useState<
     { field: string | number; message: string }[] | undefined
   >(undefined);
+
+  useEffect(() => {
+    const initialStartTime = dayjs().set("hour", 19).startOf("hour");
+    const initialEndTime = dayjs();
+    setStartTime(initialStartTime);
+    setEndTime(initialEndTime);
+    setLoading(false);
+  }, []);
 
   const handleCalculate = (e: FormEvent<HTMLFormElement>) => {
     const result = calculate(e);
@@ -71,6 +79,10 @@ export default function TimeCalculatorForm() {
     const hour = time.hour();
     return hour < 19 && hour > 3;
   };
+
+  if (loading) {
+    return <GradientCircularProgress />;
+  }
 
   return (
     <form className="flex flex-col gap-8" onSubmit={handleCalculate}>
