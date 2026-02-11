@@ -27,7 +27,7 @@ export default function TimeCalculatorForm() {
   const [endTime, setEndTime] = useState<Dayjs | null>(null);
   const [malePeople, setMalePeople] = useState<string | undefined>(undefined);
   const [femalePeople, setFemalePeople] = useState<string | undefined>(
-    undefined
+    undefined,
   );
   const [errors, setErrors] = useState<
     { field: string | number; message: string }[] | undefined
@@ -73,11 +73,11 @@ export default function TimeCalculatorForm() {
 
   const isStartTimeDisabled = (time: Dayjs) => {
     const hour = time.hour();
-    return hour < 18 && hour > 2;
+    return hour < 18 && hour > 4;
   };
   const isEndTimeDisabled = (time: Dayjs) => {
     const hour = time.hour();
-    return hour < 19 && hour > 3;
+    return hour < 19 && hour > 6;
   };
 
   if (loading) {
