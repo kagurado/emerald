@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { DesktopTimePicker } from "@mui/x-date-pickers/DesktopTimePicker";
 import dayjs, { Dayjs } from "dayjs";
 import "dayjs/locale/ja";
 import { Button } from "@/components/ui/button";
@@ -87,7 +87,7 @@ export default function TimeCalculatorForm() {
   return (
     <form className="flex flex-col gap-8" onSubmit={handleCalculate}>
       <div className="flex gap-4">
-        <TimePicker
+        <DesktopTimePicker
           name="startTime"
           label="入店時間"
           value={startTime}
@@ -99,7 +99,7 @@ export default function TimeCalculatorForm() {
           shouldDisableTime={isStartTimeDisabled}
           timeSteps={{ hours: 1, minutes: 1 }}
         />
-        <TimePicker
+        <DesktopTimePicker
           name="endTime"
           label="退店時間"
           value={endTime}
