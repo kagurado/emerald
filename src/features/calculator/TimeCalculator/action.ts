@@ -1,8 +1,8 @@
 import { FormEvent } from "react";
 import { formSchema } from "./schema";
 
-// 延長とみなさない最初の9分
-const NO_EXTENSION_MINUTES = 9;
+// 延長とみなさない最初の5分
+export const NO_EXTENSION_MINUTES = 5;
 
 export interface ActionReturn {
   input: {
@@ -88,10 +88,10 @@ export function calculate(e: FormEvent<HTMLFormElement>): ActionReturn {
 
   const now = new Date();
   const parsedStartTime = new Date(
-    `${now.toISOString().split("T")[0]}T${startTimeStr}:00`
+    `${now.toISOString().split("T")[0]}T${startTimeStr}:00`,
   );
   const parsedEndTime = new Date(
-    `${now.toISOString().split("T")[0]}T${endTimeStr}:00`
+    `${now.toISOString().split("T")[0]}T${endTimeStr}:00`,
   );
 
   if (parsedEndTime < parsedStartTime) {
@@ -99,7 +99,7 @@ export function calculate(e: FormEvent<HTMLFormElement>): ActionReturn {
   }
 
   const timeDifference = Math.floor(
-    (parsedEndTime.getTime() - parsedStartTime.getTime()) / (1000 * 60)
+    (parsedEndTime.getTime() - parsedStartTime.getTime()) / (1000 * 60),
   );
 
   const hours = Math.floor(timeDifference / 60);
@@ -132,7 +132,7 @@ export function calculate(e: FormEvent<HTMLFormElement>): ActionReturn {
   const maleExtensionCount =
     parsedMalePeople > 0 && timeDifference > 60
       ? Math.ceil(
-          Math.max(0, timeDifference - 60 - NO_EXTENSION_MINUTES) / 30
+          Math.max(0, timeDifference - 60 - NO_EXTENSION_MINUTES) / 30,
         ) * parsedMalePeople
       : 0;
 
@@ -141,7 +141,7 @@ export function calculate(e: FormEvent<HTMLFormElement>): ActionReturn {
   const femaleExtensionCount =
     parsedFemalePeople > 0 && timeDifference > 60
       ? Math.ceil(
-          Math.max(0, timeDifference - 60 - NO_EXTENSION_MINUTES) / 30
+          Math.max(0, timeDifference - 60 - NO_EXTENSION_MINUTES) / 30,
         ) * parsedFemalePeople
       : 0;
 

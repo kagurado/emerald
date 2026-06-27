@@ -15,7 +15,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { ActionReturn, calculate } from "./action";
+import { ActionReturn, calculate, NO_EXTENSION_MINUTES } from "./action";
 import GradientCircularProgress from "@/components/ui/progress";
 
 export default function TimeCalculatorForm() {
@@ -184,7 +184,7 @@ export default function TimeCalculatorForm() {
             {calculationResult.calculated.minutes}分
           </p>
           <p className="mb-2 text-gray-600 text-xs italic">
-            ※10分超過していると延長が発生するようになっています
+            {`※${NO_EXTENSION_MINUTES}分超過していると延長が発生するようになっています`}
           </p>
           <p className="mb-2 text-gray-600">
             <span className="font-semibold">合計人数：</span>{" "}
