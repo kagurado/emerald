@@ -86,76 +86,89 @@ export default function TimeCalculatorForm() {
 
   return (
     <form className="flex flex-col gap-8" onSubmit={handleCalculate}>
-      <div className="flex gap-4">
-        <DesktopTimePicker
-          name="startTime"
-          label="入店時間"
-          value={startTime}
-          onChange={(newValue) => setStartTime(newValue)}
-          ampm={false}
-          slotProps={{
-            field: { clearable: true },
-          }}
-          shouldDisableTime={isStartTimeDisabled}
-          timeSteps={{ hours: 1, minutes: 1 }}
-        />
-        <DesktopTimePicker
-          name="endTime"
-          label="退店時間"
-          value={endTime}
-          onChange={(newValue) => setEndTime(newValue)}
-          ampm={false}
-          minutesStep={1}
-          slotProps={{
-            field: { clearable: true },
-          }}
-          shouldDisableTime={isEndTimeDisabled}
-          timeSteps={{ hours: 1, minutes: 1 }}
-        />
-      </div>
-      <div className="flex gap-2">
-        <div className="w-full">
-          <Label htmlFor="malePeople">男性の人数</Label>
-          <Select
-            name="malePeople"
-            value={malePeople}
-            onValueChange={setMalePeople}
-          >
-            <SelectTrigger className="h-[56px] border-gray-400">
-              <SelectValue placeholder="人数" />
-            </SelectTrigger>
-            <SelectContent side="bottom">
-              {[...Array(21)].map((_, i) => (
-                <SelectItem key={i} value={i.toString()}>
-                  {i}人
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+      <div className="flex flex-col gap-4 p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+        <div className="flex gap-4">
+          <DesktopTimePicker
+            name="startTime"
+            label="入店時間"
+            value={startTime}
+            onChange={(newValue) => setStartTime(newValue)}
+            ampm={false}
+            slotProps={{
+              field: { clearable: true },
+            }}
+            shouldDisableTime={isStartTimeDisabled}
+            timeSteps={{ hours: 1, minutes: 1 }}
+          />
+          <DesktopTimePicker
+            name="endTime"
+            label="退店時間"
+            value={endTime}
+            onChange={(newValue) => setEndTime(newValue)}
+            ampm={false}
+            minutesStep={1}
+            slotProps={{
+              field: { clearable: true },
+            }}
+            shouldDisableTime={isEndTimeDisabled}
+            timeSteps={{ hours: 1, minutes: 1 }}
+          />
         </div>
-        <div className="w-full">
-          <Label htmlFor="femalePeople">女性の人数</Label>
-          <Select
-            name="femalePeople"
-            value={femalePeople}
-            onValueChange={setFemalePeople}
-          >
-            <SelectTrigger className="h-[56px] border-gray-400">
-              <SelectValue placeholder="人数" />
-            </SelectTrigger>
-            <SelectContent side="bottom">
-              {[...Array(21)].map((_, i) => (
-                <SelectItem key={i} value={i.toString()}>
-                  {i}人
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <div className="flex gap-2">
+          <div className="w-full flex flex-col gap-1">
+            <Label htmlFor="malePeople" className="flex items-center gap-1.5">
+              <span className="inline-block h-2 w-2 rounded-full bg-blue-500" />
+              男性の人数
+            </Label>
+            <Select
+              name="malePeople"
+              value={malePeople}
+              onValueChange={setMalePeople}
+            >
+              <SelectTrigger className="h-[56px] border-gray-400">
+                <SelectValue placeholder="人数" />
+              </SelectTrigger>
+              <SelectContent side="bottom">
+                {[...Array(21)].map((_, i) => (
+                  <SelectItem key={i} value={i.toString()}>
+                    {i}人
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="w-full flex flex-col gap-1">
+            <Label htmlFor="femalePeople" className="flex items-center gap-1.5">
+              <span className="inline-block h-2 w-2 rounded-full bg-pink-500" />
+              女性の人数
+            </Label>
+            <Select
+              name="femalePeople"
+              value={femalePeople}
+              onValueChange={setFemalePeople}
+            >
+              <SelectTrigger className="h-[56px] border-gray-400">
+                <SelectValue placeholder="人数" />
+              </SelectTrigger>
+              <SelectContent side="bottom">
+                {[...Array(21)].map((_, i) => (
+                  <SelectItem key={i} value={i.toString()}>
+                    {i}人
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
 
       <div className="flex justify-end gap-4">
-        <Button type="button" variant="outline" onClick={handleReset}>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={handleReset}
+          className="bg-white"
+        >
           クリア
         </Button>
         <Button type="submit">計算する</Button>
